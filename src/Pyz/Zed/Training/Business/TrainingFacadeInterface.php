@@ -8,6 +8,8 @@
 namespace Pyz\Zed\Training\Business;
 
 use Generated\Shared\Transfer\AntelopeCriteriaTransfer;
+use Generated\Shared\Transfer\AntelopeLocationCriteriaTransfer;
+use Generated\Shared\Transfer\AntelopeLocationResponseTransfer;
 use Generated\Shared\Transfer\AntelopeLocationTransfer;
 use Generated\Shared\Transfer\AntelopeResponseTransfer;
 use Generated\Shared\Transfer\AntelopeTransfer;
@@ -26,4 +28,8 @@ interface TrainingFacadeInterface
     public function createAntelopeLocation(AntelopeLocationTransfer $antelopeLocationTransfer): AntelopeLocationTransfer;
 
     public function findAntelopeLocationById(int $idLocation): ?AntelopeLocationTransfer;
+
+    public function findAntelopeLocation(
+        AntelopeLocationCriteriaTransfer $antelopeLocationCriteriaTransfer,
+    ): AntelopeLocationResponseTransfer;
 }

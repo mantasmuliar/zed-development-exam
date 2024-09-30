@@ -8,6 +8,8 @@
 namespace Pyz\Zed\Training\Business;
 
 use Generated\Shared\Transfer\AntelopeCriteriaTransfer;
+use Generated\Shared\Transfer\AntelopeLocationCriteriaTransfer;
+use Generated\Shared\Transfer\AntelopeLocationResponseTransfer;
 use Generated\Shared\Transfer\AntelopeLocationTransfer;
 use Generated\Shared\Transfer\AntelopeResponseTransfer;
 use Generated\Shared\Transfer\AntelopeTransfer;
@@ -39,5 +41,11 @@ class TrainingFacade extends AbstractFacade implements TrainingFacadeInterface
     public function findAntelopeLocationById(int $idLocation): ?AntelopeLocationTransfer
     {
         return $this->getFactory()->createAntelopeLocationReader()->findAntelopeLocationById($idLocation);
+    }
+
+    public function findAntelopeLocation(
+        AntelopeLocationCriteriaTransfer $antelopeLocationCriteriaTransfer,
+    ): AntelopeLocationResponseTransfer {
+        return $this->getFactory()->createAntelopeLocationReader()->findAntelopeLocation($antelopeLocationCriteriaTransfer);
     }
 }

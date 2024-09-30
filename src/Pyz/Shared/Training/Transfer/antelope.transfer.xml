@@ -22,4 +22,13 @@
         <property name="antelope" type="Antelope"/>
         <property name="isSuccessFul" type="bool"/>
     </transfer>
+
+    <transfer name="AntelopeLocationCriteria">
+        <property name="idLocation" type="int"/>
+    </transfer>
+
+    <transfer name="AntelopeLocationResponse">
+        <property name="isSuccessful" type="bool"/>
+        <property name="antelopeLocation" type="AntelopeLocation"/>
+    </transfer>
 </transfers>
