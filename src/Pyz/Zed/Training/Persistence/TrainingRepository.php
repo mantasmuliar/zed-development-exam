@@ -1,8 +1,14 @@
 <?php
 
+/**
+ * This file is part of the Spryker Commerce OS.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
+ */
+
 namespace Pyz\Zed\Training\Persistence;
 
 use Generated\Shared\Transfer\AntelopeCriteriaTransfer;
+use Generated\Shared\Transfer\AntelopeLocationTransfer;
 use Generated\Shared\Transfer\AntelopeTransfer;
 use Spryker\Zed\Kernel\Persistence\AbstractRepository;
 
@@ -12,14 +18,29 @@ use Spryker\Zed\Kernel\Persistence\AbstractRepository;
 class TrainingRepository extends AbstractRepository implements
     TrainingRepositoryInterface
 {
- public function getAntelope(AntelopeCriteriaTransfer $antelopeCriteriaTransfer):?AntelopeTransfer
- {
-     $antelopeEntity = $this->getFactory()->createAntelopeQuery()->filterByName(
-         $antelopeCriteriaTransfer->getName(),
-     )->findOne();
-     if(!$antelopeEntity){
-         return null;
-     }
-     return (new AntelopeTransfer())->fromArray($antelopeEntity->toArray(), true);
- }
+    public function getAntelope(AntelopeCriteriaTransfer $antelopeCriteriaTransfer): ?AntelopeTransfer
+    {
+        $antelopeEntity = $this->getFactory()->createAntelopeQuery()->filterByName(
+            $antelopeCriteriaTransfer->getName(),
+        )->findOne();
+        if (!$antelopeEntity) {
+            return null;
+        }
+
+        return (new AntelopeTransfer())->fromArray($antelopeEntity->toArray(), true);
+    }
+
+    public function findAntelopeLocationById(int $idLocation): ?AntelopeLocationTransfer
+    {
+        $pyzAntelopeLocation = $this->getFactory()
+            ->createAntelopeLocationQuery()
+            ->findOneByIdLocation($idLocation);
+
+        if (!$pyzAntelopeLocation) {
+            return null;
+        }
+
+        return (new AntelopeLocationTransfer())
+            ->fromArray($pyzAntelopeLocation->toArray(), true);
+    }
 }

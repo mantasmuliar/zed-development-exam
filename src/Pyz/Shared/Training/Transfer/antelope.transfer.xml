@@ -6,10 +6,18 @@
     <transfer name="Antelope">
         <property name="idAntelope" type="int"/>
         <property name="name" type="string"/>
+        <property name="fkLocation" type="int"/>
     </transfer>
+
     <transfer name="AntelopeCriteria">
         <property name="name" type="string"/>
     </transfer>
+
+    <transfer name="AntelopeLocation">
+        <property name="idLocation" type="int"/>
+        <property name="locationName" type="string"/>
+    </transfer>
+
     <transfer name="AntelopeResponse">
         <property name="antelope" type="Antelope"/>
         <property name="isSuccessFul" type="bool"/>

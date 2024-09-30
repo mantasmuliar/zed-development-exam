@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * This file is part of the Spryker Commerce OS.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
+ */
+
 namespace Pyz\Zed\Training\Business\Reader;
 
 use Generated\Shared\Transfer\AntelopeCriteriaTransfer;
@@ -9,12 +14,12 @@ use Pyz\Zed\Training\Persistence\TrainingRepositoryInterface;
 class AntelopeReader
 {
     public function __construct(
-        protected TrainingRepositoryInterface $trainingRepository
+        protected TrainingRepositoryInterface $trainingRepository,
     ) {
     }
 
     public function getAntelope(
-        AntelopeCriteriaTransfer $antelopeCriteriaTransfer
+        AntelopeCriteriaTransfer $antelopeCriteriaTransfer,
     ): AntelopeResponseTransfer {
         $antelopeTransfer = $this->trainingRepository->getAntelope($antelopeCriteriaTransfer);
         $antelopeResponseTransfer = new AntelopeResponseTransfer();
@@ -23,6 +28,7 @@ class AntelopeReader
             $antelopeResponseTransfer->setAntelope($antelopeTransfer);
             $antelopeResponseTransfer->setIsSuccessFul(true);
         }
+
         return $antelopeResponseTransfer;
     }
 }

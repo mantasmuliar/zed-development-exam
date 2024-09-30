@@ -1,16 +1,21 @@
 <?php
 
+/**
+ * This file is part of the Spryker Commerce OS.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
+ */
+
 namespace Pyz\Zed\Training\Business;
 
+use Pyz\Zed\Training\Business\Reader\AntelopeLocationReader;
 use Pyz\Zed\Training\Business\Reader\AntelopeReader;
+use Pyz\Zed\Training\Business\Writer\AntelopeLocationWriter;
 use Pyz\Zed\Training\Business\Writer\AntelopeWriter;
-use Pyz\Zed\Training\Persistence\TrainingEntityManagerInterface;
-use Pyz\Zed\Training\Persistence\TrainingRepositoryInterface;
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 
 /**
- * @method TrainingEntityManagerInterface getEntityManager()
- * @method TrainingRepositoryInterface getRepository()
+ * @method \Pyz\Zed\Training\Persistence\TrainingEntityManagerInterface getEntityManager()
+ * @method \Pyz\Zed\Training\Business\TrainingRepositoryInterface getRepository()
  */
 class TrainingBusinessFactory extends AbstractBusinessFactory
 {
@@ -22,5 +27,15 @@ class TrainingBusinessFactory extends AbstractBusinessFactory
     public function createAntelopeReader(): AntelopeReader
     {
         return new AntelopeReader($this->getRepository());
+    }
+
+    public function createAntelopeLocationWriter(): AntelopeLocationWriter
+    {
+        return new AntelopeLocationWriter($this->getEntityManager());
+    }
+
+    public function createAntelopeLocationReader(): AntelopeLocationReader
+    {
+        return new AntelopeLocationReader($this->getRepository());
     }
 }
