@@ -8,4 +8,7 @@
         <property name="locationName" type="string"/>
     </transfer>
 
+    <transfer name="AntelopeLocationCollection">
+        <property name="antelopeLocations" type="AntelopeLocation[]" singular="antelopeLocation"/>
+    </transfer>
 </transfers>

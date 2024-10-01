@@ -9,6 +9,7 @@ use Orm\Zed\Antelope\Persistence\PyzAntelopeQuery;
 use Pyz\Zed\Antelope\Business\AntelopeFacadeInterface;
 use Pyz\Zed\AntelopeGui\AntelopeGuiDependencyProvider;
 use Pyz\Zed\AntelopeGui\Communication\Form\AntelopeCreateForm;
+use Pyz\Zed\AntelopeGui\Communication\Form\AntelopeDataProvider;
 use Pyz\Zed\AntelopeGui\Communication\Table\AntelopeTable;
 use Spryker\Zed\Kernel\Communication\AbstractCommunicationFactory;
 use Symfony\Component\Form\FormInterface;
@@ -30,17 +31,24 @@ class AntelopeGuiCommunicationFactory extends AbstractCommunicationFactory
         return $this->getProvidedDependency(AntelopeGuiDependencyProvider::PROPEL_QUERY_ANTELOPE);
     }
 
+    public function createAntelopeDataProvider(): AntelopeDataProvider
+    {
+        return new AntelopeDataProvider($this->getAntelopeFacade());
+    }
+
     /**
      * @param AntelopeTransfer $antelopeTransfer
-     * @param array $options <string,mixed>
+     *
      * @return FormInterface
      */
-    public function createAntelopeCreateForm(
-        AntelopeTransfer $antelopeTransfer,
-        array $options = []
-    ): FormInterface {
-        return $this->getFormFactory()->create(AntelopeCreateForm::class,
-            $antelopeTransfer, $options);
+    public function createAntelopeCreateForm(AntelopeTransfer $antelopeTransfer): FormInterface
+    {
+        $dataProvider = $this->createAntelopeDataProvider();
+        return $this->getFormFactory()->create(
+            AntelopeCreateForm::class,
+            $antelopeTransfer,
+            $dataProvider->getOptions(),
+        );
     }
 
     public function getAntelopeFacade(): AntelopeFacadeInterface
